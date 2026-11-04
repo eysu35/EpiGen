@@ -1,0 +1,67 @@
+evals:
+  - glue
+  - harness
+  - openwebtext
+  - slimpajama
+  - fineweb
+
+glue_tasks:
+  - cola
+  - sst2
+  - mrpc
+  - qqp
+  - mnli
+  - qnli
+  - rte
+
+glue_n_epochs: 3
+glue_lr: 2e-5
+glue_batch_size: 32
+glue_max_seq_len: 128
+seed: 42
+owt_offset: 0  # skip this many OWT stream tokens before the perplexity slice (mixture runs: 200_000_000)
+
+harness_tasks:
+  - arc_easy
+  - arc_challenge
+  - openbookqa
+  - winogrande
+  - hellaswag
+  - piqa
+  - boolq
+  - lambada_openai
+
+harness_limit: null
+harness_batch_size: 16
+
+batch_size: 32
+seq_len: 512
+max_tokens: 5_000_000
+cache_dir: cache
+output: out/eval_results.json
+device: cuda
+
+runs:
+  - label: pretrained
+    path: gpt2
+  - label: epigen
+    path: out/epigen/learner
+  - label: frozengen
+    path: out/frozengen/learner
+  - label: ppl
+    path: out/ppl/learner
+  - label: nobuffer
+    path: out/nobuffer/learner
+  - label: random_init
+    path: out/random_init/learner
+  - label: mixture_25p
+    path: out/mixture_25p/learner
+  - label: mixture_50p
+    path: out/mixture_50p/learner
+  - label: mixture_100p
+    path: out/mixture_100p/learner
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null

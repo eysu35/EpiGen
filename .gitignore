@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.ruff_cache/
+out/
+cache/
+wandb/
+slurm_*.out
+slurm_*.err
+logs/
+*.log
+.nfs*

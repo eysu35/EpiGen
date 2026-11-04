@@ -1,0 +1,25 @@
+H: 6000
+S: 10
+batch_size: 32
+seq_len: 512
+lr_learner: 1e-5
+lr_generator: 1e-6
+tau: 1.0
+beta: 0.99
+sample_from_buffer: 16
+reward_mode: epiplexity
+freeze_generator: true
+eval_interval: 1000
+eval_tokens: 500_000
+log_interval: 50
+wandb_project: epigen
+no_wandb: false
+tag: frozengen
+seed: 42
+out_dir: out/frozengen
+prompt: ""
+
+hydra:
+  run:
+    dir: .
+  output_subdir: null
